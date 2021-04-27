@@ -10,9 +10,10 @@
     $app->post("/projetos/delete/{id}",'App\Action\ProjetosAction:delete')->add(App\Middleware\AuthMiddleware::class);
     $app->post("/projetos/salvar[/]",'App\Action\ProjetosAction:salvar')->add(App\Middleware\AuthMiddleware::class);  
 
+    $app->get("/atividades/novo[/]",'App\Action\AtividadesAction:novo');
     $app->get("/atividades/{id}[/]",'App\Action\AtividadesAction:index');
-   /* $app->get("/atividades/novo[/]",'App\Action\AtividadesAction:novo');
-    $app->get("/atividades/editar/{id}",'App\Action\AtividadesAction:editar')->add(App\Middleware\AuthMiddleware::class);
+    
+   /* $app->get("/atividades/editar/{id}",'App\Action\AtividadesAction:editar')->add(App\Middleware\AuthMiddleware::class);
     $app->post("/atividades/delete/{id}",'App\Action\AtividadesAction:delete')->add(App\Middleware\AuthMiddleware::class);
     $app->post("/proatividadesjetos/salvar[/]",'App\Action\AtividadesAction:salvar')->add(App\Middleware\AuthMiddleware::class);*/
 ?>

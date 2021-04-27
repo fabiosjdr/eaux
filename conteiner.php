@@ -33,7 +33,7 @@
             
         return function ($request, $response, $exception) use ($c) {
             
-            if($exception->getCode() == 1045){
+            if($exception->getCode() == 1045 || $exception->getCode() == 1049){
 
                 $vars['page'] = 'principal';
                 $vars['include'] = 'primeiro/inicial.php';
@@ -41,6 +41,8 @@
                 $response = $c['view']->render($response,'index.php',$vars);    
 
                 return $response;
+            }else{
+                die($exception);
             }
         };
     };

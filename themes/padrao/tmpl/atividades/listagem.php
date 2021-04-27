@@ -19,7 +19,7 @@
 	</div>
 	
 	<div class=" col-12 col-sm-6 col-md-4 col-lg-2 ">	
-		<form id="nomodal"  method="get" action="<?= BASEURL.'projetos/novo/' ?>"  >
+		<form id="nomodal"  method="get" action="<?= BASEURL.'atividades/novo/' ?>"  >
 			<input  type="submit" class="btn btn-success col-12" value="Nova atividade" title="nova atividade">
 		</form>
 	</div>
