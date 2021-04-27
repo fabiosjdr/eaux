@@ -82,10 +82,6 @@ $(document).ready(function(){
 	});
 		
 }); 
-		
-$('form').ready(function(){
-	$(this).focus_first();
-});
 
 
 function alertaSuave(parametros){

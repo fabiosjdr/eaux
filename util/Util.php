@@ -293,6 +293,11 @@ class Util{
 
     }
 
+    public function testConnection(){
+
+        if($this->container->db);
+    }
+
     public function in_array_r($item , $array){
         return preg_match('/"'.preg_quote($item, '/').'"/i' , json_encode($array));
     }

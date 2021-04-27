@@ -33,5 +33,10 @@
 		  return false;
 		}  
 	
-	  }
+	}
+
+	function primeiroAcesso(){
+		
+		echo '<script>alert("teste")</script>';
+	}
 ?>

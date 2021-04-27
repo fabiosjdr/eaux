@@ -3,36 +3,22 @@
 
 	use Util;
 	use Funcoes;
-	use stdclass;
 
 	class Action {
 
 		private $tabela;
 		private $container;
 
-		function __construct($container = ''){
+		function __construct($container){
 			
-			if($container == ''){
+			$this->container = $container;		
+			$this->util =  new util\Util($container);			
+			$this->util->testConnection();
 
-				require BASEDIR.'inicializar.php';				
-
-				$this->container = $container;			
-
-			}
-
-			$this->container = $container;
-		
-			$this->util =  new util\Util($container);
-			
-			$this->stdclass = new stdClass();
-			$this->stdclass->Objeto = new stdClass();
-
-			
 		}
 
 		function __destruct(){
 			
-			unset($this->stdclass->Objeto);
 			unset($this->util);
 
 		}
@@ -54,12 +40,12 @@
 		
 		public function ajax($request,$response){
 
-			$util = new util\Util($this);
-
 			$func = $request->getAttribute('func');
 
 			$this->$func($request,$response);
 		}
+
+		
 
 			
 

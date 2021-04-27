@@ -12,13 +12,11 @@
    
     <script>
         var getUrl = window.location;
-        //var ajaxpath = getUrl.protocol + "//" + getUrl.host; 
         var ajaxpath = "<?php echo BASEURL ?>"     
         var urlpadrao = "<?php echo THEMEURL ?>"       
     </script>
    
     <script src="<?php echo BASEURL ?>App/bibliotecas/js/jquery-3.3.1.min.js"></script>   
-    <script src="<?php echo BASEURL ?>App/bibliotecas/js/jquery.ui.datepicker-pt-BR.js"></script>    
     <script src="<?php echo BASEURL ?>App/bibliotecas/js/FuncoesPadrao.js"></script>       
     <script src="<?php echo BASEURL ?>App/bibliotecas/js/bootstrap.min.js" ></script>
    
