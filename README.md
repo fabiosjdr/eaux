@@ -2,12 +2,13 @@
 
 Projeto desenvolvido utilizando PHP, HTML, SlimFramework, Jquery, Bootstrap.
 
-O SlimFramework foi utilizado para criação das rotas, 
-Frontend e Backend -> Bootstrap , Jquery, Html5, PHP
+O SlimFramework foi utilizado para criação das rotas.
+
+Frontend e Backend -> Bootstrap , Jquery, Html5 e PHP7.
 
 # instalação
 
-Clone o repositorio no diretorio onde o apache esta configurado
+Clone o repositório no diretorio onde o seu apache estiver configurado
 Ex : /var/www/html/desafio_eaux
 
 Ao iniciar o sistema pela primeira vez, será solicitado os dados para conexão do banco de dados.
