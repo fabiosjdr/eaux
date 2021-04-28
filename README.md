@@ -9,7 +9,7 @@ Frontend e Backend -> Bootstrap , Jquery, Html5 e PHP7.
 # Instalação
 
 Clone o repositório no diretorio onde o seu apache estiver configurado
-Ex : /var/www/html/desafio_eaux
+Ex : /var/www/html/
 
 Ao iniciar o sistema pela primeira vez, será solicitado os dados para conexão do banco de dados.
 
