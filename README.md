@@ -1,4 +1,4 @@
-# desafio eaux
+# Desafio eaux
 
 Projeto desenvolvido utilizando PHP, HTML, SlimFramework, Jquery, Bootstrap.
 
@@ -6,7 +6,7 @@ O SlimFramework foi utilizado para criação das rotas.
 
 Frontend e Backend -> Bootstrap , Jquery, Html5 e PHP7.
 
-# instalação
+# Instalação
 
 Clone o repositório no diretorio onde o seu apache estiver configurado
 Ex : /var/www/html/desafio_eaux
