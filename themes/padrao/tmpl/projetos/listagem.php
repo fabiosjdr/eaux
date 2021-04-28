@@ -12,7 +12,7 @@
 			<div class="input-group">
                 <input type="text" name="palavra" id="palavra" placeholder="palavra chave" class="busca form-control" value="<?= @$palavra ?>"/>
                 <div class="input-group-append">
-                  <input  type="submit" value="Buscar" class="btn btn-primary"/>
+				  <input  type="submit" value="Buscar" class="btn btn-primary"/>
                 </div>
             </div>
 		</form>
@@ -20,6 +20,7 @@
 	
 	<div class=" col-12 col-sm-6 col-md-4 col-lg-2 ">	
 		<form id="nomodal"  method="get" action="<?= BASEURL.'projetos/novo/' ?>"  >
+			
 			<input  type="submit" class="btn btn-success col-12" value="Novo projeto" title="novo projeto">
 		</form>
 	</div>

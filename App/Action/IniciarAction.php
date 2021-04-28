@@ -17,12 +17,6 @@ final class IniciarAction extends Action{
 			$dbconf =  $this->util->getPosts($request);
 			$configfile = BASEPATH.'/App/inc/config.json';
 			
-			if(file_exists($configfile)){
-				unlink($configfile);
-			}
-
-			file_put_contents($configfile,json_encode($dbconf) );
-
 			try{
 
 				$pdo = new \PDO('mysql:host=' . $dbconf['host'] . ';charset=utf8', $dbconf['user'], $dbconf['pass']);
@@ -33,23 +27,47 @@ final class IniciarAction extends Action{
 				$script = preg_replace('/DB_DESAFIO/',$dbconf['dbname'],$script);
 
 				$query = $pdo->prepare($script);
-				$query->execute();
+				
+				
+				if( $query->execute() ){
+
+					$saida['sucesso'] = true;
+					$saida['mensagem'] =  $this->gerarArquivoConf($configfile,$dbconf);
+				}else{
+
+					$saida['sucesso'] = false;
+					$saida['mensagem'] = 'Falha ao conectar ao banco de dados com as informações fornecidas';
+				}
+
+				
 
 			}catch(PDOException $e){
 				
 				$saida['sucesso'] = false;
-				$saida['mensagem'] = $e;
+				$saida['mensagem'] = $e->errorInfo[2];
 
-			}finally{
-				
-				$saida['sucesso'] = true;
-				$saida['mensagem'] ='agora e so importar';
-				
 			}
-            
+				
 			
 			echo json_encode($saida);exit;
 			
+		}
+
+		function gerarArquivoConf($configfile,$dbconf){
+			
+			if(!is_writable($configfile)){
+
+				return 'Sue banco de dados foi instalado com sucesso, porém o arquivo <b>'.$configfile.'</b> não tem permissão de escrita, 
+						por favor conceda permissão ou caso prefira insira manualmente com os seguintes dados. 
+						<pre>'.\json_encode($dbconf).'</pre>';
+
+
+			}else{
+
+				file_put_contents($configfile,json_encode($dbconf) );
+
+				return 'Parabéns o sistema foi configurado corretamente. <input type="button" onclick="javascript:window.location.reload()" value="Continuar">';
+			}
 		}
 
 	

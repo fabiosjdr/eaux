@@ -8,7 +8,7 @@
 
 	define('BASEURL',HTTP.$_SERVER['SERVER_NAME'].'/'.BASEFILES.'/');
 	define('THEMEPATH',$_SERVER['DOCUMENT_ROOT'].BASEFILES.'/themes/'.THEME);
-	define('BASEPATH',$_SERVER['DOCUMENT_ROOT'].BASEFILES);
+	define('BASEPATH',$_SERVER['DOCUMENT_ROOT'].'/'.BASEFILES);
 	define('THEMEURL', BASEURL.'/themes/'.THEME);
 
 	$configfile = __DIR__.'/config.json';

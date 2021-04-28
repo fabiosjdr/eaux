@@ -84,23 +84,6 @@ $(document).ready(function(){
 }); 
 
 
-function alertaSuave(parametros){
-	
-	parametros.area.addClass('prelative');
-
-	parametros.area.html("<div class='custom-alert " + parametros.classe + "' role='alert'>" + parametros.texto + "<div>").hide().fadeIn('slow');
-	
-	if(typeof parametros.focus !== 'undefined' ){
-		parametros.focus.focus();
-	}
-
-	window.setTimeout(function (){		
-		$(".custom-alert").fadeOut(1000, function () {
-			$(this).remove();
-		});
-	}, parametros.tempo);
-}
-
 function fecharModal(){
 
 	$("#area_mensagem_dinamica").modal("hide");

@@ -20,6 +20,12 @@
 						
 			$INT_PROJ = $request->getAttribute('id');
 
+			$info = $this->util->getTable('PROJETOS',$INT_PROJ);			
+
+			$vars['INT_PROJ'] = $INT_PROJ;
+
+			$vars['NM_PROJ'] = $info->NM_PROJ;
+
 			$vars['page'] = 'principal';
 			
 			$vars['include']   = $this->arquivo.'/'.'listagem.php';		
@@ -35,6 +41,7 @@
 
 		function novo($request,$response){
 			
+			$vars['INT_PROJ'] = $request->getAttribute('id');
 			
 			$vars['page'] = 'principal';
 			$vars['include'] = $this->arquivo.'/formulario.php';
@@ -49,11 +56,7 @@
 			$id = $request->getAttribute('id');
 			
 			if(!is_numeric($id)){
-
-				$vars['page'] = '404';
-				$response = $this->container['view']->render($response,'index.php',$vars);
-				return $response;
-				//return $response->withRedirect(BASEURL);
+				return $response->withRedirect(BASEURL);
 			}
 			
 			$dados = $this->util->getTable($this->getTabela(),$id);
@@ -63,7 +66,7 @@
 
 			$vars['dados'] = $dados;
 			$vars['page'] = 'principal';			
-			
+			$vars['INT_PROJ'] = $dados->INT_PROJ;	
 			$vars['include'] = $this->arquivo.'/formulario.php';
 			$response = $this->view->render($response,'index.php',$vars);
 	
@@ -74,23 +77,21 @@
 		function delete($request,$response){
 		
 			$id = $request->getAttribute('id');
-	
+
 			if(!is_numeric($id)){
-				$vars['page'] = '404';
-				$response = $this->container['view']->render($response,'index.php',$vars);
-				return $response;
-				//return $response->withRedirect(BASEURL);
+				return $response->withRedirect(BASEURL);
 			}
+
+			//apenas para o redirecinamento correto
+			$info = $this->util->getTable($this->getTabela(),$id);
+
+			if($this->util->delete($this->getTabela(),$id) ){
 	
-			$util = new util\Util($this);
-	
-			if($util->delete($this->getTabela(),$id) ){
-	
-				return $response->withRedirect(BASEURL.$this->arquivo);
+				return $response->withRedirect(BASEURL.$this->arquivo.'/'.$info->INT_PROJ);
 	
 			}else{
 	
-				$vars['page'] = 'painel';
+				$vars['page'] = 'principal';
 				$vars['erro'] = $GLOBALS['erro'];
 				$vars['include'] = 'erro/erro.php';
 				$response = $this->view->render($response,'index.php',$vars);
@@ -103,46 +104,45 @@
 
 		function busca($request,$response){
 			
+			$INT_PROJ = $request->getAttribute('id');
+
+			$info = $this->util->getTable('PROJETOS',$INT_PROJ);
+
+			$vars['INT_PROJ'] = $INT_PROJ;
+
+			$vars['NM_PROJ'] = $info->NM_PROJ;
+
 			$dados =  $this->util->getPosts($request);	
 			
-
-			$vars['pagina'] = filter_var($request->getAttribute('pagina'),FILTER_SANITIZE_NUMBER_INT);			
-
-            $vars['INT_TP_BUSC'] = $_GET['INT_TP_BUSC'];
-			$vars['STR_BUSCA'] = $_GET['STR_BUSCA'];			
+			$STR_BUSCA = $_GET['palavra']; // mundo real colocar anti injection
 
             $vars['include'] = $this->arquivo.'/'.'listagem.php';	
+			
+			$vars['palavra'] = $STR_BUSCA;
 
-            $documentacao = $this->obterProcessos($vars);			
+            $atividades = $this->obterAtividades($INT_PROJ, $STR_BUSCA);			
 
-			if($this->CONTA != ''){
-				$vars['page'] = 'painel';
-			}else{
-				$vars['page'] = 'principal';
-			}
-
-            $vars['render'] = $this->renderizarListagem($documentacao);            
+			$vars['page'] = 'principal';
+			
+            $vars['render'] = $this->renderizarAtividades($atividades);            
 
 			$response = $this->view->render($response,'index.php',$vars);
 
 			return $response;
 			
 		}
-		
-    	function salvar($request,$response){
+
+		function salvar($request,$response){
 			
 			$dados =  $this->util->getPosts($request);
 
-			/*$dados['D_INI'] = Funcoes\DataBR2US($dados['D_INI']);
-			$dados['D_FIM'] = Funcoes\DataBR2US($dados['D_FIM']);*/
-            
-            if( $INT_PROJ = $this->util->save($this->getTabela(),$dados,true)){
+		    if( $INT_PROJ_ATIV = $this->util->save($this->getTabela(),$dados,true)){
                 
-               return $response->withRedirect(BASEURL);
+               return $response->withRedirect(BASEURL.'/atividades/'.$dados['INT_PROJ']);
                
             }else{
 
-                $vars['page'] = 'painel';
+                $vars['page'] = 'principal';
                 $vars['erro'] = $GLOBALS['erro'];
                 $vars['include'] = 'erro/erro.php';
                 $response = $this->view->render($response,'index.php',$vars);
@@ -158,7 +158,8 @@
 							<th>Nome da atividade</th>
 							<th>Data de início</th>
 							<th>Data de término</th>
-							<th>Finalizado</th>							
+							<th>Finalizado</th>	
+							<th colspan="2">Finalizado</th>						
 						</tr>';
 						
 			if($atividades){
@@ -171,12 +172,12 @@
 									<td>'.Funcoes\DataUS2BR($L->D_FIM).'</td>
 									<td>'.$L->LG_FIN.'</td>
 									<td>
-										<form action="'.BASEURL.'projetos/editar/'.$L->INT_PROJ.'">	
+										<form action="'.BASEURL.'atividades/editar/'.$L->INT_PROJ_ATV.'">	
 											<button class="btn btn-warning" >Editar</button>
 										</form>
 									</td>
 									<td>
-										<form id="delete" action="'.BASEURL.'projetos/delete/'.$L->INT_PROJ.'" method="post">
+										<form id="delete" action="'.BASEURL.'atividades/delete/'.$L->INT_PROJ_ATV.'" method="post">
 											<button class="btn btn-danger">Excluir</button>
 										</form>
 									</td>								
@@ -191,9 +192,16 @@
 			return $RENDER;
 		}
 		
-		function obterAtividades($INT_PROJ){
+		function obterAtividades($INT_PROJ,$STR_BUSCA = ''){
 
-			$R = $this->util->query("SELECT * FROM PROJETO_TEM_ATIVIDADE WHERE INT_PROJ = '$INT_PROJ'");
+			$sql = "SELECT * FROM PROJETO_TEM_ATIVIDADE PTA WHERE PTA.INT_PROJ = '$INT_PROJ'";
+
+			if($STR_BUSCA != ''){
+
+				$sql .= " AND ( PTA.NM_ATVD LIKE '%$STR_BUSCA%' || PTA.LG_FIN = '$STR_BUSCA'|| PTA.D_INI = '".Funcoes\DataBR2US($STR_BUSCA)."' || PTA.D_FIM = '".Funcoes\DataBR2US($STR_BUSCA)."' )";
+			}	
+			
+			$R = $this->util->query($sql);
 
 			return $R;
 		}

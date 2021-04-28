@@ -85,9 +85,7 @@
 				//return $response->withRedirect(BASEURL);
 			}
 	
-			$util = new util\Util($this);
-	
-			if($util->delete($this->getTabela(),$id) ){
+			if($this->util->delete($this->getTabela(),$id) ){
 	
 				return $response->withRedirect(BASEURL.$this->arquivo);
 	
@@ -108,23 +106,17 @@
 			
 			$dados =  $this->util->getPosts($request);	
 			
-
-			$vars['pagina'] = filter_var($request->getAttribute('pagina'),FILTER_SANITIZE_NUMBER_INT);			
-
-            $vars['INT_TP_BUSC'] = $_GET['INT_TP_BUSC'];
-			$vars['STR_BUSCA'] = $_GET['STR_BUSCA'];			
+			$STR_BUSCA = $_GET['palavra']; // mundo real colocar anti injection
 
             $vars['include'] = $this->arquivo.'/'.'listagem.php';	
+			
+			$vars['palavra'] = $STR_BUSCA;
 
-            $documentacao = $this->obterProcessos($vars);			
+            $projetos = $this->obterProjetos($STR_BUSCA);			
 
-			if($this->CONTA != ''){
-				$vars['page'] = 'painel';
-			}else{
-				$vars['page'] = 'principal';
-			}
-
-            $vars['render'] = $this->renderizarListagem($documentacao);            
+			$vars['page'] = 'principal';
+			
+            $vars['render'] = $this->renderizarProjetos($projetos);            
 
 			$response = $this->view->render($response,'index.php',$vars);
 
@@ -169,16 +161,18 @@
 			if($projetos){
 
 				while( $L = $projetos->fetchObject()){ 
-				
+
+					$ATRASO = ($L->ATRASO == 'S') ?"<span class='btn btn-danger btn-sm'> Sim </span> " : "<span class='btn btn-success btn-sm'> Não </span> ";
+					$PORC = ($L->PORCENTO == '') ? '0.00' : $L->PORCENTO;
 					$RENDER .= '<tr>
 									<td>'.$L->NM_PROJ.'</td>
 									<td>'.Funcoes\DataUS2BR($L->D_INI).'</td>
 									<td>'.Funcoes\DataUS2BR($L->D_FIM).'</td>
-									<td>0 %</td>
-									<td>N</td>	
+									<td>'.$PORC.' %</td>
+									<td>'.$ATRASO.'</td>	
 									<td>
 										<form action="atividades/'.$L->INT_PROJ.'">	
-											<button class="btn btn-success" >Ver atividades</button>
+											<button class="btn btn-info" >Ver atividades</button>
 										</form>
 									</td>
 									<td>
@@ -202,9 +196,38 @@
 			return $RENDER;
 		}
 		
-		function obterProjetos(){
+		function obterProjetos($STR_BUSCA =  ''){
 
-			$R = $this->util->query("SELECT * FROM PROJETOS");
+			$sql = "SELECT 
+					*,
+					ROUND((
+						(
+							SELECT COUNT(INT_PROJ_ATV) 
+							FROM PROJETO_TEM_ATIVIDADE 
+							WHERE INT_PROJ = P.INT_PROJ AND LG_FIN = 'S'
+						) * 100
+					  ) / 
+					  (
+							SELECT COUNT(INT_PROJ_ATV) 
+							FROM PROJETO_TEM_ATIVIDADE 
+							WHERE INT_PROJ = P.INT_PROJ
+					   )
+					,2) AS PORCENTO,
+					IF ((
+							SELECT MAX(D_FIM) 
+							FROM PROJETO_TEM_ATIVIDADE 
+							WHERE INT_PROJ = P.INT_PROJ
+						) > P.D_FIM, 'S','N'
+					) AS ATRASO 
+				FROM
+					PROJETOS P";
+
+			if($STR_BUSCA != ''){
+
+				$sql .= " WHERE P.NM_PROJ LIKE '%$STR_BUSCA%' || P.D_INI = '".Funcoes\DataBR2US($STR_BUSCA)."' || P.D_FIM = '".Funcoes\DataBR2US($STR_BUSCA)."' ";
+			}		
+			//echo $sql;exit;
+			$R = $this->util->query($sql);
 
 			return $R;
 		}

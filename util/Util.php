@@ -84,7 +84,7 @@ class Util{
         $sql .= ($innerjoin)? ' '.$innerjoin: '';
 
         $sql .= ($id)? ' where '.$primarykey.' = '.$id : '';
-        
+        //echo $sql;exit;
         $result = $this->query($sql);
 
         return $result->fetch(\PDO::FETCH_OBJ);

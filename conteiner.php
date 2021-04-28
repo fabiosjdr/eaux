@@ -28,12 +28,14 @@
         };
     };
 
-    //aqui eu verifico se o banco de dados esta connectado
+    //aqui eu verifico se o banco de dados esta conectado
     $container['errorHandler'] = function ($c) { 
             
         return function ($request, $response, $exception) use ($c) {
-            
-            if($exception->getCode() == 1045 || $exception->getCode() == 1049){
+
+            $v_erros = [1045, 1049, 2002];
+
+            if( in_array($exception->getCode(),$v_erros )){
 
                 $vars['page'] = 'principal';
                 $vars['include'] = 'primeiro/inicial.php';

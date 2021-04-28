@@ -10,12 +10,12 @@
   
   <div class="col-lg-12 p-4 bg-secondary">
     
-    <!--<div class="jumbotron jumbotron-fluid">
+    <div class="jumbotron jumbotron-fluid">
         <div class="container">
             <h1 class="display-4">Bem vindo a tela inicial do desafio EAUX</h1>
-            <p class="lead">Vamos configurar o banco de dados, por favor preencha as informações abaixo. :)</p>
+            <p class="lead">Vamos configurar o banco de dados, por favor preencha as informações abaixo.</p>
         </div>
-    </div>-->
+    </div>
     <div class="row">
         
         <div class="col-lg-4">
@@ -39,9 +39,17 @@
         </div>
 
     </div>        
+
     
 
   </div>
+
+  <div class="row p-3 ">
+
+        <div id="retorno" class="alert col-12 text-center" role="alert">
+          
+        </div>
+    </div>
 </form>
 
 <script>
@@ -49,7 +57,16 @@
   function instalar(){
               
       $.post(ajaxpath + 'iniciar/ajax/processar',$('#form').serialize(),function(data){
-        console.log(data);
+          
+          if(data.sucesso == true){
+            
+            $('#retorno').html(data.mensagem).removeClass('alert-warning').addClass('alert-success');
+            
+          }else{
+           
+            $('#retorno').html(data.mensagem).removeClass('alert-success').addClass('alert-warning');
+          }
+
       },'JSON');
   }
   
