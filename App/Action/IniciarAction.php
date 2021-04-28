@@ -57,7 +57,7 @@ final class IniciarAction extends Action{
 			
 			if(!is_writable($configfile)){
 
-				return 'Sue banco de dados foi instalado com sucesso, porém o arquivo <b>'.$configfile.'</b> não tem permissão de escrita, 
+				return 'Seu banco de dados foi instalado com sucesso, porém o arquivo <b>'.$configfile.'</b> não tem permissão de escrita, 
 						por favor conceda permissão ou caso prefira insira manualmente com os seguintes dados. 
 						<pre>'.\json_encode($dbconf).'</pre>';
 
