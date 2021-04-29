@@ -2,17 +2,16 @@
 	namespace App\Action;
 
 	use Util;
-	use Funcoes;
 
 	class Action {
 
 		private $tabela;
 		private $container;
 
-		function __construct($container){
+		function __construct($container ){
 			
 			$this->container = $container;		
-			$this->util =  new util\Util($container);			
+			$this->util =  new util\UtilModel($container);			
 			$this->util->testConnection();
 
 		}
@@ -45,9 +44,6 @@
 			$this->$func($request,$response);
 		}
 
-		
-
-			
-
 	}
+
 ?>
