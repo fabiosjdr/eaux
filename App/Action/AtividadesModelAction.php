@@ -70,7 +70,7 @@
 
             if( $INT_PROJ_ATIV = $this->util->save($this->tabela->getTabela(),$dados,true)){
                 
-            return $response->withRedirect(BASEURL.'/atividades/'.$dados['INT_PROJ']);
+                return $response->withRedirect(BASEURL.'/atividades/'.$dados['INT_PROJ']);
             
             }else{
 

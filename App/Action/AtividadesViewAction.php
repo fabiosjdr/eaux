@@ -4,7 +4,7 @@
     use App\Interfaces;
     use Funcoes;
 
-    class AtividadesViewAction implements Interfaces\ActionView{
+    class AtividadesViewAction extends Action implements Interfaces\ActionView{
     
         function novo($request,$response){
        
