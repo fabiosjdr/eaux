@@ -1,20 +1,18 @@
 <?php
 	namespace App\Action;
 
-	use Util;
-	use Util\Classes;
+	//use Util\Classes;
 
-	class Action extends Classes\Ajax {
+	class Action {
 
 		private $tabela;
 		private $container;
 
 		function __construct($container ){
+			//print_r($container);exit;
+			$this->container = $container;				
+			$this->container->util->testConnection($container);
 			
-			$this->container = $container;		
-			$this->util =  new Util\Util($container);	
-			$this->util->testConnection($container);
-
 		}
 
 		function __destruct(){
@@ -29,6 +27,11 @@
 			}
 		}
 		
+		public function ajax($request,$response){
+
+			$func = $request->getAttribute('func');
+			$this->$func($request,$response);
+		}
 
 	}
 

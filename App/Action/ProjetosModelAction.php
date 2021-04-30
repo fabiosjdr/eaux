@@ -8,7 +8,6 @@ use Funcoes;
 class ProjetosModelAction extends Action implements Interfaces\ActionModel{
 	
     function __construct($container){
-
         parent::__construct($container);
         $this->tabela = new Classes\SetTabela('PROJETOS');
     }

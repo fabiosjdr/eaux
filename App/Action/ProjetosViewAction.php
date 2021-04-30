@@ -7,6 +7,7 @@ use Funcoes;
 
 class ProjetosViewAction extends Action implements Interfaces\ActionView{
 
+  
     function novo($request,$response){
             
         //$vars['INT_PROJ'] = $request->getAttribute('id');

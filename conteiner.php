@@ -49,7 +49,9 @@
         };
     };
 
+    $container['util'] = new Util\Util($container);
+    // $container['model'] = '';
+    //$container['view'] = '';
    
-    
-
+    //print_r($container);exit;
 ?>
