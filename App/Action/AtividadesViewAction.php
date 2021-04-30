@@ -7,7 +7,9 @@
     class AtividadesViewAction extends Action implements Interfaces\ActionView{
     
         function novo($request,$response){
-       
+            
+            $vars['INT_PROJ'] = $request->getAttribute('id');
+
             $vars['page'] = 'principal';
             $vars['include'] = 'atividades/formulario.php';
             $response = $this->view->render($response,'index.php',$vars);
