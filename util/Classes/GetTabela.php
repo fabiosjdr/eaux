@@ -10,7 +10,7 @@
             $this->tabela = $NM_TABELA;
         }
 
-        public function getTabela(){
+        public function getNomeTabela(){
             return $this->tabela;
         }
     }

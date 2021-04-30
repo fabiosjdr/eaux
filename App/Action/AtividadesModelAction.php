@@ -24,7 +24,7 @@
                 return $response->withRedirect(BASEURL);
             }
             
-            $dados = $this->util->getTable($this->tabela->getTabela(),$id);
+            $dados = $this->util->getTable($this->tabela->getNomeTabela(),$id);
             
             $vars['dados'] = $dados;
             $vars['page'] = 'principal';			
@@ -45,9 +45,9 @@
             }
 
             //apenas para o redirecinamento correto
-            $info = $this->util->getTable($this->tabela->getTabela(),$id);
+            $info = $this->util->getTable($this->tabela->getNomeTabela(),$id);
 
-            if($this->util->delete($this->tabela->getTabela(),$id) ){
+            if($this->util->delete($this->tabela->getNomeTabela(),$id) ){
 
                 return $response->withRedirect(BASEURL.'atividades/'.$info->INT_PROJ);
 
@@ -68,7 +68,7 @@
             
             $dados =  $this->util->getPosts($request);
 
-            if( $INT_PROJ_ATIV = $this->util->save($this->tabela->getTabela(),$dados,true)){
+            if( $INT_PROJ_ATIV = $this->util->save($this->tabela->getNomeTabela(),$dados,true)){
                 
                 return $response->withRedirect(BASEURL.'/atividades/'.$dados['INT_PROJ']);
             

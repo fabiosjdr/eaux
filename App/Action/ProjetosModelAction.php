@@ -25,7 +25,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
             //return $response->withRedirect(BASEURL);
         }
         
-        $dados = $this->util->getTable($this->tabela->getTabela(),$id);
+        $dados = $this->util->getTable($this->tabela->getNomeTabela(),$id);
        
         $vars['dados'] = $dados;
         $vars['page'] = 'principal';			
@@ -48,7 +48,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
             //return $response->withRedirect(BASEURL);
         }
 
-        if($this->util->delete($this->tabela->getTabela(),$id) ){
+        if($this->util->delete($this->tabela->getNomeTabela(),$id) ){
 
             return $response->withRedirect(BASEURL.'projetos');
 
@@ -70,7 +70,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
         $dados =  $this->util->getPosts($request);
         
               
-        if( $INT_PROJ = $this->util->save($this->tabela->getTabela(),$dados,true)){
+        if( $INT_PROJ = $this->util->save($this->tabela->getNomeTabela(),$dados,true)){
           
            return $response->withRedirect(BASEURL);
            

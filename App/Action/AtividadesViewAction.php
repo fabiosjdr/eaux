@@ -9,7 +9,7 @@
         function novo($request,$response){
        
             $vars['page'] = 'principal';
-            $vars['include'] = 'projetos/formulario.php';
+            $vars['include'] = 'atividades/formulario.php';
             $response = $this->view->render($response,'index.php',$vars);
     
             return $response;
