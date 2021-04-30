@@ -1,9 +1,9 @@
 <?php
   
-   // $app->get("/",'App\Action\ProjetosAction:index');  
+    
     $app->get("/",'App\Action\ProjetosAction:index');  
 
-    $app->post("/iniciar/ajax/{func}[/[{id}]]",'App\Action\IniciarAction:ajax')->add(App\Middleware\AuthMiddleware::class);
+    $app->post("/iniciar/ajax/{func}[/[{id}]]",'App\Action\IniciarAction:ajax');
 
     $app->get("/projetos[/]",'App\Action\ProjetosAction:index');
     $app->get("/projetos/novo[/]",'App\Action\ProjetosViewAction:novo');

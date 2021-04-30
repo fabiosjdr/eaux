@@ -14,7 +14,6 @@
 			
 			//aqui podemos tratar sessao, login etc
 			if(1==1){
-
 				$response = $next($request, $response);
 	        	return $response;
 			}

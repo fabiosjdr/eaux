@@ -12,7 +12,7 @@ class ProjetosViewAction extends Action implements Interfaces\ActionView{
         $vars['INT_PROJ'] = $request->getAttribute('id');
         
         $vars['page'] = 'principal';
-        $vars['include'] = 'atividades/formulario.php';
+        $vars['include'] = 'projetos/formulario.php';
         $response = $this->view->render($response,'index.php',$vars);
 
         return $response;

@@ -3,13 +3,16 @@
     namespace App\Action;
     
     use App\Interfaces;
+    use Util\Classes;
 	use Funcoes;
-    class AtividadesModelAction extends Action implements Interfaces\ActionModel{
 
+    class AtividadesModelAction extends Action implements Interfaces\ActionModel{
+        
         function __construct($container){
 
             parent::__construct($container);
-            $this->setTabela('PROJETO_TEM_ATIVIDADE');
+            $this->tabela = new Classes\SetTabela('PROJETO_TEM_ATIVIDADE');
+            
         }
 
        
@@ -21,7 +24,7 @@
                 return $response->withRedirect(BASEURL);
             }
             
-            $dados = $this->util->getTable($this->getTabela(),$id);
+            $dados = $this->util->getTable($this->tabela->getTabela(),$id);
             
             $vars['dados'] = $dados;
             $vars['page'] = 'principal';			
@@ -42,9 +45,9 @@
             }
 
             //apenas para o redirecinamento correto
-            $info = $this->util->getTable($this->getTabela(),$id);
+            $info = $this->util->getTable($this->tabela->getTabela(),$id);
 
-            if($this->util->delete($this->getTabela(),$id) ){
+            if($this->util->delete($this->tabela->getTabela(),$id) ){
 
                 return $response->withRedirect(BASEURL.'atividades/'.$info->INT_PROJ);
 
@@ -65,7 +68,7 @@
             
             $dados =  $this->util->getPosts($request);
 
-            if( $INT_PROJ_ATIV = $this->util->save($this->getTabela(),$dados,true)){
+            if( $INT_PROJ_ATIV = $this->util->save($this->tabela->getTabela(),$dados,true)){
                 
             return $response->withRedirect(BASEURL.'/atividades/'.$dados['INT_PROJ']);
             

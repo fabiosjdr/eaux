@@ -4,19 +4,11 @@ namespace Util;
 
 use PDOException;
 
-class Util{   
+class Util extends UtilModel{   
 
-    protected $container;
+    
     public $campos;
     public $valores;
-   
-    private $TABELA;    
-    
-    function __construct( $container) {        
-        
-        $this->container = $container;              
-
-    }
    
     public function getPosts($request){
 
@@ -38,10 +30,23 @@ class Util{
        
     }
 
-    public function sqlPrimarykey($tabela){
+    public function getTable($tabela,$id = null ,$campos = null,$innerjoin = null){
+       
+        $primarykey = $this->getPrimaryKey($tabela);
+        
+        $sql = 'SELECT ';
 
-        $primary = $this->getPrimaryKey($tabela);
-        return  " , '$primary' AS primarykey ";
+        $sql .= ($campos)? join(',',$campos): '*';
+
+        $sql .= ' FROM '.$tabela;
+
+        $sql .= ($innerjoin)? ' '.$innerjoin: '';
+
+        $sql .= ($id)? ' where '.$primarykey.' = '.$id : '';
+        //echo $sql;exit;
+        $result = $this->query($sql);
+
+        return $result->fetch(\PDO::FETCH_OBJ);
     }
 
     public function getPrimaryKey($tabela){
@@ -54,13 +59,7 @@ class Util{
       
         return $result->Column_name;
  
-    }
-    
-    
-    public function testConnection(){
-
-        if($this->container->db);
-    }
+    }    
 
 
 }

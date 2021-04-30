@@ -3,7 +3,7 @@
     namespace Util;
     use PDOException;
 
-    Class UtilModel extends Util{
+    Class UtilModel extends UtilTesteConnection {
 
         public function save($tabela,$dados,$retornarId = false){
 
@@ -149,25 +149,6 @@
                 throw $e;
             }
             
-        }
-
-        public function getTable($tabela,$id = null ,$campos = null,$innerjoin = null){
-       
-            $primarykey = $this->getPrimaryKey($tabela);
-            
-            $sql = 'SELECT ';
-    
-            $sql .= ($campos)? join(',',$campos): '*';
-    
-            $sql .= ' FROM '.$tabela;
-    
-            $sql .= ($innerjoin)? ' '.$innerjoin: '';
-    
-            $sql .= ($id)? ' where '.$primarykey.' = '.$id : '';
-            //echo $sql;exit;
-            $result = $this->query($sql);
-    
-            return $result->fetch(\PDO::FETCH_OBJ);
         }
 
         public function query($sql,$params = null,$fetched = false){

@@ -7,7 +7,7 @@
 final class IniciarAction extends Action{
         
 		function __construct($container){
-			//aqui nao posso usar o contruct parent senao fica em loop com a tela de primeiro acesso
+			
 			$this->container = $container;
 			$this->util =  new util\Util($container);			
 		}

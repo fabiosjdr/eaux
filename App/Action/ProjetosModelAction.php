@@ -2,6 +2,7 @@
 namespace App\Action;
 
 use App\Interfaces;
+use Util\Classes;
 use Funcoes;
 
 class ProjetosModelAction extends Action implements Interfaces\ActionModel{
@@ -9,7 +10,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
     function __construct($container){
 
         parent::__construct($container);
-        $this->setTabela('PROJETOS');
+        $this->tabela = new Classes\SetTabela('PROJETOS');
     }
     
     function editar($request,$response){
@@ -24,7 +25,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
             //return $response->withRedirect(BASEURL);
         }
         
-        $dados = $this->util->getTable($this->getTabela(),$id);
+        $dados = $this->util->getTable($this->tabela->getTabela(),$id);
        
         $vars['dados'] = $dados;
         $vars['page'] = 'principal';			
@@ -47,7 +48,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
             //return $response->withRedirect(BASEURL);
         }
 
-        if($this->util->delete($this->getTabela(),$id) ){
+        if($this->util->delete($this->tabela->getTabela(),$id) ){
 
             return $response->withRedirect(BASEURL.'projetos');
 
@@ -69,7 +70,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
         $dados =  $this->util->getPosts($request);
         
               
-        if( $INT_PROJ = $this->util->save($this->getTabela(),$dados,true)){
+        if( $INT_PROJ = $this->util->save($this->tabela->getTabela(),$dados,true)){
           
            return $response->withRedirect(BASEURL);
            
