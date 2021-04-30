@@ -52,7 +52,7 @@
 			
 			$STR_BUSCA = $_GET['palavra']; // mundo real colocar anti injection
 
-            $vars['include'] = $this->arquivo.'/'.'listagem.php';	
+            $vars['include'] = 'atividades/listagem.php';	
 			
 			$vars['palavra'] = $STR_BUSCA;
 

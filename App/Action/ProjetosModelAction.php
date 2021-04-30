@@ -12,33 +12,20 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
         $this->setTabela('PROJETOS');
     }
     
-    function novo($request,$response){
-       
-        $vars['page'] = 'principal';
-        $vars['include'] = 'projetos/formulario.php';
-        $response = $this->view->render($response,'index.php',$vars);
-
-        return $response;
-        
-    }
-
     function editar($request,$response){
         
         $id = $request->getAttribute('id');
         
         if(!is_numeric($id)){
 
-            $vars['page'] = '404';
-            $response = $this->container['view']->render($response,'index.php',$vars);
+            $vars['page'] = '404/404';
+            $response = $this->view->render($response,'index.php',$vars);
             return $response;
             //return $response->withRedirect(BASEURL);
         }
         
         $dados = $this->util->getTable($this->getTabela(),$id);
        
-        /*$dados->D_INI = Funcoes\DataUS2BR($dados->D_INI);
-        $dados->D_FIM = Funcoes\DataUS2BR($dados->D_FIM);*/
-
         $vars['dados'] = $dados;
         $vars['page'] = 'principal';			
         
@@ -81,9 +68,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
         
         $dados =  $this->util->getPosts($request);
         
-        /*$dados['D_INI'] = Funcoes\DataBR2US($dados['D_INI']);
-        $dados['D_FIM'] = Funcoes\DataBR2US($dados['D_FIM']);*/
-        
+              
         if( $INT_PROJ = $this->util->save($this->getTabela(),$dados,true)){
           
            return $response->withRedirect(BASEURL);

@@ -1,8 +1,9 @@
 <?php
 
     namespace App\Action;
+    
     use App\Interfaces;
-
+	use Funcoes;
     class AtividadesModelAction extends Action implements Interfaces\ActionModel{
 
         function __construct($container){
@@ -11,18 +12,7 @@
             $this->setTabela('PROJETO_TEM_ATIVIDADE');
         }
 
-        function novo($request,$response){
-            
-            $vars['INT_PROJ'] = $request->getAttribute('id');
-            
-            $vars['page'] = 'principal';
-            $vars['include'] = 'atividades/formulario.php';
-            $response = $this->view->render($response,'index.php',$vars);
-
-            return $response;
-            
-        }
-
+       
         function editar($request,$response){
             
             $id = $request->getAttribute('id');

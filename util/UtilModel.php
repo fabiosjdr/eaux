@@ -12,7 +12,6 @@
             //mensagem humana em caso de erro
             $GLOBALS['erro']['mensagem_usuario'] = 'Não foi possível salvar o registro.';
             
-            
             try {
     
                 $dados = (object) $dados;
@@ -108,13 +107,11 @@
                 
                 $result = $this->query($sql,$valores);
     
-    
                 if($retornarId){
                     return $this->container->db->lastInsertId();
                 }else{
                     return true;    
                 }
-                    
                   
             } catch (PDOException $e) {
                 
@@ -134,10 +131,7 @@
                 if($id > 0){
                 
                     $sql = 'DELETE FROM '.$tabela;
-    
                     $sql .= ' where '.$primarykey.' = '.$id ;
-                    
-                    //echo $sql;exit;
     
                     $GLOBALS['erro']['mensagem_usuario'] = 'Não foi possível remover o registro.';
                     return $this->query($sql);
@@ -149,19 +143,12 @@
     
                     return false;
                 }
-    
-                
                   
             } catch (PDOException $e) {
-                
     
                 throw $e;
-               
             }
             
-            
-    
-    
         }
 
         public function getTable($tabela,$id = null ,$campos = null,$innerjoin = null){

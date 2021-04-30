@@ -6,7 +6,16 @@
 
     class AtividadesViewAction implements Interfaces\ActionView{
     
-
+        function novo($request,$response){
+       
+            $vars['page'] = 'principal';
+            $vars['include'] = 'projetos/formulario.php';
+            $response = $this->view->render($response,'index.php',$vars);
+    
+            return $response;
+            
+        }
+        
         function renderizar($atividades){
 
             $RENDER = '<table class="table table-striped">

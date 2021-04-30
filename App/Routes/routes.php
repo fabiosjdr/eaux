@@ -6,13 +6,13 @@
     $app->post("/iniciar/ajax/{func}[/[{id}]]",'App\Action\IniciarAction:ajax')->add(App\Middleware\AuthMiddleware::class);
 
     $app->get("/projetos[/]",'App\Action\ProjetosAction:index');
-    $app->get("/projetos/novo[/]",'App\Action\ProjetosModelAction:novo');
+    $app->get("/projetos/novo[/]",'App\Action\ProjetosViewAction:novo');
     $app->get("/projetos/editar/{id}",'App\Action\ProjetosModelAction:editar')->add(App\Middleware\AuthMiddleware::class);
     $app->post("/projetos/delete/{id}",'App\Action\ProjetosModelAction:delete')->add(App\Middleware\AuthMiddleware::class);
     $app->post("/projetos/salvar[/]",'App\Action\ProjetosModelAction:salvar')->add(App\Middleware\AuthMiddleware::class);  
     $app->get("/projetos/busca/",'App\Action\ProjetosAction:busca')->add(App\Middleware\AuthMiddleware::class);
 
-    $app->get("/atividades/novo/{id}",'App\Action\AtividadesModelAction:novo');
+    $app->get("/atividades/novo/{id}",'App\Action\AtividadesViewAction:novo');
     $app->post("/atividades/salvar[/]",'App\Action\AtividadesModelAction:salvar')->add(App\Middleware\AuthMiddleware::class);
     $app->get("/atividades/editar/{id}",'App\Action\AtividadesModelAction:editar')->add(App\Middleware\AuthMiddleware::class);
     $app->post("/atividades/delete/{id}",'App\Action\AtividadesModelAction:delete')->add(App\Middleware\AuthMiddleware::class);

@@ -6,7 +6,7 @@
         
 		private $modelAction;
 		private $viewAction;
-
+		
 		function __construct($container){
 
 			parent::__construct($container);
