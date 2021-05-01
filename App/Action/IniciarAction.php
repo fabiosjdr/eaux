@@ -6,12 +6,6 @@
 
 final class IniciarAction extends Action{
         
-		function __construct($container){
-			
-			$this->container = $container;
-			$this->util =  new util\Util($container);			
-		}
-
 		function processar($request,$response){			
 			
 			$dbconf =  $this->util->getPosts($request);
@@ -69,8 +63,6 @@ final class IniciarAction extends Action{
 				return 'Parabéns o sistema foi configurado corretamente. <input type="button" onclick="javascript:window.location.reload()" value="Continuar">';
 			}
 		}
-
-	
 
 	}
 	

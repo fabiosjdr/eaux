@@ -8,13 +8,6 @@
 
     class AtividadesModelAction extends Action implements Interfaces\ActionModel{
         
-        function __construct($container){
-
-            parent::__construct($container);
-            $this->tabela = new Classes\SetTabela('PROJETO_TEM_ATIVIDADE');
-            
-        }
-
        
         function editar($request,$response){
             

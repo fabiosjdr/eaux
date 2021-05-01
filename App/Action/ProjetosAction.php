@@ -4,21 +4,6 @@
 	class ProjetosAction extends Action{
 
         
-		//private $modelAction;
-		//private $viewAction;
-
-		function __construct($container){
-
-			parent::__construct($container);
-			
-			$this->modelAction = new ProjetosModelAction($container);
-			$this->viewAction = new ProjetosViewAction($container);
-
-			//$this->modelAction = new ProjetosModelAction($container->model);
-			//$this->viewAction = new ProjetosViewAction($container->view);
-
-		}
-		
 		function index($request, $response){
 			
 			$vars['page'] = 'principal';

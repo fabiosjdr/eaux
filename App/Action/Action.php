@@ -11,7 +11,7 @@
 		function __construct($container ){
 			//print_r($container);exit;
 			$this->container = $container;				
-			$this->container->util->testConnection($container);
+			$this->testeConnection->testConnection($container);
 			
 		}
 

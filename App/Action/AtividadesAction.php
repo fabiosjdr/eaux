@@ -4,17 +4,6 @@
 	
     class AtividadesAction extends Action{
 
-		private $modelAction;
-		private $viewAction;
-		
-		function __construct($container){
-
-			parent::__construct($container);
-
-			$this->modelAction = new AtividadesModelAction($container);
-			$this->viewAction = new AtividadesViewAction($container);
-		}
-		
 		function index($request,$response){
 						
 			$INT_PROJ = $request->getAttribute('id');

@@ -2,7 +2,7 @@
 
     namespace Util\Classes;
 
-    class GetTabela{
+    class TabelaDaClasse{
         
         private $tabela;
 

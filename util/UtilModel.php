@@ -3,7 +3,13 @@
     namespace Util;
     use PDOException;
 
-    Class UtilModel extends UtilTesteConnection {
+    Class UtilModel {
+
+        protected $container;
+        
+        function __construct( $container) {                   
+            $this->container = $container;         
+        }
 
         public function save($tabela,$dados,$retornarId = false){
 

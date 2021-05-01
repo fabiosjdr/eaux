@@ -7,10 +7,7 @@ use Funcoes;
 
 class ProjetosModelAction extends Action implements Interfaces\ActionModel{
 	
-    function __construct($container){
-        parent::__construct($container);
-        $this->tabela = new Classes\SetTabela('PROJETOS');
-    }
+    
     
     function editar($request,$response){
         
@@ -41,10 +38,9 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
         $id = $request->getAttribute('id');
 
         if(!is_numeric($id)){
-            $vars['page'] = '404';
+            $vars['page'] = '404/404';
             $response = $this->view->render($response,'index.php',$vars);
             return $response;
-            //return $response->withRedirect(BASEURL);
         }
 
         if($this->util->delete($this->tabela->getNomeTabela(),$id) ){
