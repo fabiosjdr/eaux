@@ -5,7 +5,7 @@
 
     Class UtilModel {
 
-        protected $container;
+        private $container;
         
         function __construct( $container) {                   
             $this->container = $container;         
@@ -13,7 +13,7 @@
 
         public function save($tabela,$dados,$retornarId = false){
 
-            $primarykey = $this->getPrimaryKey($tabela);
+            $primarykey = $this->container->util->getPrimaryKey($tabela);
             
             //mensagem humana em caso de erro
             $GLOBALS['erro']['mensagem_usuario'] = 'Não foi possível salvar o registro.';
@@ -130,7 +130,7 @@
     
         public function delete($tabela,$id){
     
-            $primarykey = $this->getPrimaryKey($tabela);       
+            $primarykey = $this->container->util->getPrimaryKey($tabela);       
     
             try {
                 

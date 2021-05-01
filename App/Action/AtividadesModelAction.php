@@ -40,7 +40,7 @@
             //apenas para o redirecinamento correto
             $info = $this->util->getTable($this->tabela->getNomeTabela(),$id);
 
-            if($this->util->delete($this->tabela->getNomeTabela(),$id) ){
+            if($this->utilModel->delete($this->tabela->getNomeTabela(),$id) ){
 
                 return $response->withRedirect(BASEURL.'atividades/'.$info->INT_PROJ);
 
@@ -61,7 +61,7 @@
             
             $dados =  $this->util->getPosts($request);
 
-            if( $INT_PROJ_ATIV = $this->util->save($this->tabela->getNomeTabela(),$dados,true)){
+            if( $INT_PROJ_ATIV = $this->utilModel->save($this->tabela->getNomeTabela(),$dados,true)){
                 
                 return $response->withRedirect(BASEURL.'/atividades/'.$dados['INT_PROJ']);
             
@@ -85,7 +85,7 @@
                 $sql .= " AND ( PTA.NM_ATVD LIKE '%$STR_BUSCA%' || PTA.LG_FIN = '$STR_BUSCA'|| PTA.D_INI = '".Funcoes\DataBR2US($STR_BUSCA)."' || PTA.D_FIM = '".Funcoes\DataBR2US($STR_BUSCA)."' )";
             }	
             
-            $R = $this->util->query($sql);
+            $R = $this->utilModel->query($sql);
 
             return $R;
         }

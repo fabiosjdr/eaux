@@ -43,7 +43,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
             return $response;
         }
 
-        if($this->util->delete($this->tabela->getNomeTabela(),$id) ){
+        if($this->utilModel->delete($this->tabela->getNomeTabela(),$id) ){
 
             return $response->withRedirect(BASEURL.'projetos');
 
@@ -65,7 +65,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
         $dados =  $this->util->getPosts($request);
         
               
-        if( $INT_PROJ = $this->util->save($this->tabela->getNomeTabela(),$dados,true)){
+        if( $INT_PROJ = $this->utilModel->save($this->tabela->getNomeTabela(),$dados,true)){
           
            return $response->withRedirect(BASEURL);
            
@@ -111,7 +111,7 @@ class ProjetosModelAction extends Action implements Interfaces\ActionModel{
             $sql .= " WHERE P.NM_PROJ LIKE '%$STR_BUSCA%' || P.D_INI = '".Funcoes\DataBR2US($STR_BUSCA)."' || P.D_FIM = '".Funcoes\DataBR2US($STR_BUSCA)."' ";
         }		
         //echo $sql;exit;
-        $R = $this->util->query($sql);
+        $R = $this->utilModel->query($sql);
 
         return $R;
     }

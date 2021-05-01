@@ -5,6 +5,11 @@
 
     $container['view'] = new \Slim\Views\PhpRenderer('themes/'.THEME);
     
+    $container['util'] = new Util\Util($container);
+    $container['utilModel'] = new Util\UtilModel($container);
+
+    $container['testeConnection'] = new Util\UtilTesteConnection($container);
+    
     //conecta o banco que quiser
     $container['db'] = function ($c){
         
@@ -49,6 +54,6 @@
         };
     };
 
-    $container['util'] = new Util\Util($container);
-    $container['testeConnection'] = new Util\UtilTesteConnection($container);
+
+   
 ?>

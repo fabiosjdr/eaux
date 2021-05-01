@@ -4,9 +4,13 @@ namespace Util;
 
 use PDOException;
 
-class Util extends UtilModel{   
+//class Util extends UtilModel{   
+class Util {   
 
-    
+    function __construct( $container) {                   
+        $this->container = $container;         
+    }
+
     public $campos;
     public $valores;
    
@@ -44,7 +48,7 @@ class Util extends UtilModel{
 
         $sql .= ($id)? ' where '.$primarykey.' = '.$id : '';
         //echo $sql;exit;
-        $result = $this->query($sql);
+        $result = $this->container->utilModel->query($sql);
 
         return $result->fetch(\PDO::FETCH_OBJ);
     }

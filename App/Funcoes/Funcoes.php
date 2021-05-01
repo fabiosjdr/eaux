@@ -2,7 +2,8 @@
 	
 	namespace Funcoes;
 	
-	
+	use App\Action;
+	use Util;
 	/* se precisar de funcões inserir aqui*/
 
 	function DataBR2US($D){
@@ -35,8 +36,21 @@
 	
 	}
 
-	function primeiroAcesso(){
+	function buildConteinerAction($container,$actionClass){
 		
-		echo '<script>alert("teste")</script>';
+		if($actionClass == 'projetos'){
+
+			$container['modelAction'] = new Action\ProjetosModelAction($container);
+			$container['viewAction']  = new Action\ProjetosViewAction($container);			
+			$container['tabela']	  = new Util\Classes\TabelaDaClasse('PROJETOS');
+
+		}else{
+
+			$container['modelAction'] = new Action\AtividadesModelAction($container);
+			$container['viewAction']  = new Action\AtividadesViewAction($container);			
+			$container['tabela']	  = new Util\Classes\TabelaDaClasse('PROJETO_TEM_ATIVIDADE');
+		}
+		
+		return $container;
 	}
 ?>
