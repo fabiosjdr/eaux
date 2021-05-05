@@ -7,7 +7,6 @@
     
     $container['util'] = new Util\Util($container);
     $container['utilModel'] = new Util\UtilModel($container);
-
     $container['testeConnection'] = new Util\UtilTesteConnection($container);
     
     //conecta o banco que quiser

@@ -10,8 +10,7 @@
 
 		function __construct($container ){
 			//print_r($container);exit;
-			$this->container = $container;				
-			$this->testeConnection->testConnection($container);
+			$this->container = $container;							
 			
 		}
 

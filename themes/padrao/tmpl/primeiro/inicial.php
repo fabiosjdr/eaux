@@ -10,12 +10,6 @@
   
   <div class="col-lg-12 p-4 bg-secondary">
     
-    <!--<div class="jumbotron jumbotron-fluid">
-        <div class="container">
-            <h1 class="display-4">Bem vindo a tela inicial do desafio EAUX</h1>
-            <p class="lead">Vamos configurar o banco de dados, por favor preencha as informações abaixo.</p>
-        </div>
-    </div> -->
     <div class="row">
         
         <div class="col-lg-4">
